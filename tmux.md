@@ -25,7 +25,7 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 旋转 pane 布局（顺时针）|||`}`|
 旋转 pane 布局（逆时针）|||`{`|
 重新分配 pane 布局|||`空格`|tmux 会自动改变布局
-** Window **|
+**Window**||||
 新建 window||`:new-window`|`c`|tmux 底部状态栏会显示 window 信息
 重命名 window||`:rename-window -t {窗口号｜旧名字} {新名字}`|`,`|默认是新窗口的进程名
 显示 window 编号||`:choose-window`|`w`|
