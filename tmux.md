@@ -61,29 +61,36 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 
 ## 自动化
 1\. **`session -> window -> vim -> input`**
+
 `tmux send-keys -t 1 "vim" "C-m" "i" "输入内容咯"`
 - `-t 1` 表示给*最近活跃的 session` 的 1 号 pane 发送按键。
 - `-t foo:1` 具体指定目标
 
 2\. **结合 Shell**
+
 `<P>:run-shell [-b] [-t {pane_id}] "{shell_command}"`
 - `-b` 将 shell 放到后台运行
 - `-t pane号` 将 shell 输出放到指定 pane 显示
 
 可以用来**自定义按键**：
+
 `bind-key e select-pane -L \; run-shell "ls -la && ls ~/Desktop"`
 
 甚至是**自适应按键**：
+
 `bind-key u if-shell "test $(ls | grep Dropbox | wc -l) -gt 0" "display-message 'Folder does not exist'" "display-message 'Folder exists'"`
 
 
 ## 特殊功能
 1\. 自动重复 `<P>` (Repeatable Keys)
+
 `-r`
 需要连续进行多个 tmux 操作时，只需要按一次 `<P>`，不用每个命令都由 `<P>` 开始。
 
 2\. 多 pane 同步输入
+
 **注意，同一 window 内的全部 pane 都会同步**
+
 `<P>:setw synchronize-panes`
 `<P>:setw synchronize-panes off`
 
