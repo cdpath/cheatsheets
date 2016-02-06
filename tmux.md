@@ -6,7 +6,11 @@
 
 目的|外部命令|内部命令(`<P>`)|快捷键(`<P>`)|说明
 ---|---|---|---|---
+新建 Session|`tmux new -s s1 (-d)`|||`-d` 只创建，不进入 Session
+查看 Session|`tmux ls`|`:list-sessions`||
 断开 Session|||`d`|
+连接 Session|`tmux attach -t s1`|`:choose-session`|next `(` or previous `)`|
+重命名 Session|`tmux rename-session -t <OLD NAME> <New Name>`|`:rename-session -t <OLD NAME> <NEW NAME>`||
 分割 window |`tmux split-window -t foo:1`|||分割窗口就意味着创建两个 pane
 调整 pane 大小||`:resize-panel -t {窗口号} -D {大小}`||
 加大 pane（向左）||`:resizep -L`|`<`|
