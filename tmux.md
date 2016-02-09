@@ -1,8 +1,15 @@
 参考书：
 [tmux Taster](http://book.douban.com/subject/26296805/)
 
+## 准备
+```bash
+brew install stow
+git clone https://github.com/cdpath/dotfiles.git ~/dotfiles
+cd !$
+stow tmux
+```
 ## 基本操作
-下面所有**内部命令**和**快捷键**都需要先按下 `<P>`。
+下面所有**内部命令**和**快捷键**都需要先按下 `<P>`，默认为`^b`
 
 目的|外部命令|内部命令(`<P>`)|快捷键(`<P>`)|说明
 ---|---|---|---|---
@@ -118,8 +125,8 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 
 4\. `^R` 反向搜索历史在 tmux 中无法使用：
 
-在 `.tmux.conf` 中绑定按键，
-```bash
+在 `.zshrc` 中绑定按键，
+```zsh
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
