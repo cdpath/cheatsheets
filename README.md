@@ -1,0 +1,6 @@
+- [x] [tmux](https://github.com/cdpath/cheatsheets/blob/master/tmux.md)
+- [ ] vim
+- [ ] bash
+- [ ] PyCharm
+- [ ] Sublime Text
+- [ ] Graphviz
