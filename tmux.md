@@ -15,7 +15,7 @@ stow tmux
 ---|---|---|---|---
 新建 Session|`tmux new -s s1 (-d)`|`:new`||`-d` 只创建，不进入 Session
 查看 Session|`tmux ls`|`:list-sessions`|`s`（已被占用）|
-断开 Session|||`d`|
+断开 Session|`tmux detach -s s1`||`d`|
 连接 Session|`tmux attach -t s1`|`:choose-session`|next `(` or previous `)`|
 重命名 Session|`tmux rename-session -t <OLD NAME> <New Name>`|`:rename-session -t <OLD NAME> <NEW NAME>`|`$`|
 **pane**||||
@@ -131,6 +131,23 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 ```
+
+5\. 系统重启后 tmux session 丢失
+
+使用[这个脚本](https://github.com/mislav/dotfiles/blob/master/bin/tmux-session)可以重建 `Window`，但是不能重建 `pane`。
+
+```bash
+# 保存 session
+tmux-session save
+# 恢复 session
+tmux-session restore
+```
+6\. 切分屏幕（pane）之后鼠标选择粘贴无法限定在小 pane 内
+<暂无解>
+
+7\. 嵌套 tmux 时如何操作内层 tmux？[参考 stackoverflow](http://superuser.com/questions/249659/how-to-detach-a-tmux-session-that-itself-already-in-a-tmux)
+
+重复 `<P>` 就好了，比如用 `C-b C-b d` 来 `detach`
 
 ## workflow
 > we weren’t developing our applications in an environment that accurately represented the live server environment.
