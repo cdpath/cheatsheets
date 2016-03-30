@@ -134,18 +134,39 @@ bindkey '^E' end-of-line
 
 5\. 系统重启后 tmux session 丢失
 
-使用[这个脚本](https://github.com/mislav/dotfiles/blob/master/bin/tmux-session)可以重建 `Window`，但是不能重建 `pane`。
+方法一，使用[这个脚本](https://github.com/mislav/dotfiles/blob/master/bin/tmux-session)，可以重建 `Window`，但是 `pane` 内容丢失。
+
+保存：`tmux-session save`
+
+恢复：`tmux-session restore`
+
+方法二，使用 [Tmux Resurrect](https://github.com/tmux-plugins/tmux-resurrect) 插件。
+
+可以选择保存 [vim 内容](https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_vim_and_neovim_sessions.md)，[pane 内容](https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_pane_contents.md)甚至 [bash 历史](https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_bash_history.md)。
+
+```
+# 安装
+git clone https://github.com/tmux-plugins/tmux-resurrect ~/tmux/plugins/resurrect
+rc=$?; if [ $rc != 0 ]; then exit $rc; fi
+cd !$
+echo 'run-shell ~/tmux/plugins/resurrect/resurrect.tmux' >> ~/.tmux.conf
+tmux source-file ~/.tmux.conf
+```
+保存：`<P>Ctrl-s`
+
+恢复：进入 `tmux`，在 tmux 内 `<P>Ctrl-r`
+
+6\. 切分屏幕（pane）之后鼠标选择粘贴无法限定在小 pane 内
 
 ```bash
-# 保存 session
-tmux-session save
-# 恢复 session
-tmux-session restore
+git clone https://github.com/tmux-plugins/tmux-yank ~/tmux/plugins/tmux-yank
+echo 'run-shell ~/tmux/plugins/tmux-yank/yank.tmux' >> ~/.tmux.conf
+tmux source-file ~/.tmux.conf
 ```
-6\. 切分屏幕（pane）之后鼠标选择粘贴无法限定在小 pane 内
-<暂无解>
 
-7\. 嵌套 tmux 时如何操作内层 tmux？[参考 stackoverflow](http://superuser.com/questions/249659/how-to-detach-a-tmux-session-that-itself-already-in-a-tmux)
+7\. 嵌套 tmux 时如何操作内层 tmux？
+
+[参考 stackoverflow](http://superuser.com/questions/249659/how-to-detach-a-tmux-session-that-itself-already-in-a-tmux)
 
 重复 `<P>` 就好了，比如用 `C-b C-b d` 来 `detach`
 
