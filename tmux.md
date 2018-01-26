@@ -117,7 +117,7 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 
 2\. 操作系统重启了怎么恢复状态？
 
-借助 tmux 插件，[tmux-resurrect](https://github.com/ tmux-plugins/tmux-resurrect)
+借助 tmux 插件，[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect)
 
 3\. tmux 环境和 bash 环境的冲突
 
