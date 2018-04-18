@@ -1,64 +1,54 @@
-参考书：
-[tmux Taster](http://book.douban.com/subject/26296805/)
-
-## 准备
-```bash
-brew install stow
-git clone https://github.com/cdpath/dotfiles.git ~/dotfiles
-cd !$
-stow tmux
-```
 ## 基本操作
-下面所有**内部命令**和**快捷键**都需要先按下 `<P>`，默认为`^b`
+下面所有**内部命令**和**快捷键**都需要先按下 `<P>`，默认为<kbd>CTRL</kbd>+<kbd>b</kbd>
 
 目的|外部命令|内部命令(`<P>`)|快捷键(`<P>`)|说明
 ---|---|---|---|---
 新建 Session|`tmux new -s s1 (-d)`|`:new`||`-d` 只创建，不进入 Session
-查看 Session|`tmux ls`|`:list-sessions`|`s`（已被占用）|
-断开 Session|`tmux detach -s s1`||`d`|
-连接 Session|`tmux attach -t s1`|`:choose-session`|next `(` or previous `)`|
-重命名 Session|`tmux rename-session -t <OLD NAME> <New Name>`|`:rename-session -t <OLD NAME> <NEW NAME>`|`$`|
+查看 Session|`tmux ls`|`:list-sessions`|<kbd>s</kbd>|
+断开 Session|`tmux detach -s s1`||<kbd>d</kbd>|
+连接 Session|`tmux attach -t s1`|`:choose-session`|next <kbd>(</kbd> or previous <kbd>)</kbd>|
+重命名 Session|`tmux rename-session -t <OLD NAME> <New Name>`|`:rename-session -t <OLD NAME> <NEW NAME>`|<kbd>$</kbd>|
 **pane**||||
 分割 window |`tmux split-window -t foo:1`|||分割窗口就意味着创建两个 pane
-关闭 pane |||`x`|
-切换 pane 焦点|||`o`|
+关闭 pane |||<kbd>x</kbd>|
+切换 pane 焦点|||<kbd>o</kbd>|
 调整 pane 大小||`:resize-panel -t {窗口号} -D {大小}`||
-加大 pane（向左）||`:resizep -L`|`<`|
-加大 pane（向上）||`:resizep -U`|`+`|
+加大 pane（向左）||`:resizep -L`|<kbd><</kbd>|
+加大 pane（向上）||`:resizep -U`|<kbd>+</kbd>|
 均分 pane（水平）||`:select-layout even-horizontal`||
 均分 pane（垂直）||`:select-layout even-vertical`||
-显示 pane 编号||`:display-panes`|`q`|
-跳转到上个 pane||`:last-pane`|`;`|
-将 pane 全屏||`:resize-pane -Z`|`z`|跳转 pane 或者重复快捷键即可退出
-pane -> window ||`:break-pane`|`!`|
+显示 pane 编号||`:display-panes`|<kbd>q</kbd>|
+跳转到上个 pane||`:last-pane`|<kbd>;</kbd>|
+将 pane 全屏||`:resize-pane -Z`|<kbd>z</kbd>|跳转 pane 或者重复快捷键即可退出
+pane -> window ||`:break-pane`|<kbd>!</kbd>|
 window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
-旋转 pane 布局（顺时针）|||`}`|
-旋转 pane 布局（逆时针）|||`{`|
-重新分配 pane 布局|||`空格`|tmux 会自动改变布局
+旋转 pane 布局（顺时针）|||<kbd>}</kbd>|
+旋转 pane 布局（逆时针）|||<kbd>{</kbd>|
+重新分配 pane 布局|||<kbd>space</kbd>|tmux 会自动改变布局
 **Window**||||
-新建 window||`:new-window`|`c`|tmux 底部状态栏会显示 window 信息
-重命名 window||`:rename-window -t {窗口号｜旧名字} {新名字}`|`,`|默认是新窗口的进程名
-显示 window 编号||`:choose-window`|`w`|
-下一个 Window|||`n`|
-上一个 Window|||`p`|
-跳转到指定 Window|||`数字`|输入 Window 号
-搜索并跳转到 Window||`find-window`|`f`|可以搜索窗口名，或者窗口内容
-关闭 Window（发送 EOF）|||`Ctrl-D`|不需要 `<P>`
-关闭 Window（当前窗口） ||`kill-window`|`&`|
+新建 window||`:new-window`|<kbd>c</kbd>|tmux 底部状态栏会显示 window 信息
+重命名 window||`:rename-window -t {窗口号｜旧名字} {新名字}`|<kbd>,</kbd>|默认是新窗口的进程名
+显示 window 编号||`:choose-window`|<kbd>w</kbd>|
+下一个 Window|||<kbd>n</kbd>|
+上一个 Window|||<kbd>p</kbd>|
+跳转到指定 Window|||<kbd>数字</kbd>|输入 Window 号
+搜索并跳转到 Window||`find-window`|<kbd>f</kbd>|可以搜索窗口名，或者窗口内容
+关闭 Window（发送 EOF）|||<kbd>CTRL</kbd>+<kbd>D</kbd>|不需要 `<P>`
+关闭 Window（当前窗口） ||`kill-window`|<kbd>&</kbd>|
 关闭 Window（只保留当前窗口） ||`kill-window -a`||当前窗口保留，其他都删除
 关闭 Window（关闭指定窗口） ||`kill-window -t 编号`||关闭窗口号对应的窗口
 重新布局 Window (更改位置）||`move-window -t 编号`||**未成功！**
 重新布局 Window (交换位置）||`swap-window -s 编号 -t 编号`||
-跨 Session 重新布局 Window |`tmux move-window -s foo:1 -t bar:2`|`move-window -t bar:2`|`.`|
+跨 Session 重新布局 Window |`tmux move-window -s foo:1 -t bar:2`|`move-window -t bar:2`|<kbd>.</kbd>|
 跨 Session 共享 Window ||`:link-window -s foo: 1 -t bar:2`||不指定 `-s` 就使用当前Session当前Window；使用 `-k` 强行共享
 **拷贝粘贴**|
-进入 Copy Mode||`:copy-mode`|`[`|
-退出|||`q` 或 `回车`|Linux: `q` 或 `ESC`
-选择过程|||`空格` 到 `回车`|Linux: `^空格` 到 `ESC-w`
-查看剪贴板缓存||`:list-buffers`|`#`|
+进入 Copy Mode||`:copy-mode`|<kbd>[</kbd>|
+退出|||<kbd>q</kbd> 或 <kbd>ENTER</kbd>|Linux: <kbd>q</kbd> 或 <kbd>ESC</kbd>
+选择过程|||<kbd>space</kbd> 到 <kbd>ENTER</kbd>|Linux: <kbd>CTRL</kbd>+<kbd>space</kbd> 到 <kbd>ESC</kbd>+<kbd>w</kbd>
+查看剪贴板缓存||`:list-buffers`|<kbd>#</kbd>|
 查看最新剪贴板缓存||`:show-buffer`||
-选择内容去粘贴||`:choose-buffer`|`=`（已被占用）|
-粘贴||`:paste-buffer`|`]`|
+选择内容去粘贴||`:choose-buffer`|<kbd>=</kbd>（已被占用）|
+粘贴||`:paste-buffer`|<kbd>]</kbd>|
 保存剪贴板内容到文件||`:save-buffer ~/path`||
 
 ## `.bashrc`
@@ -110,7 +100,7 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 
 只能在 Linux 下借助 `Reptyr` 实现，具体步骤：
 
-1. 将进程放入后台：`^Z`
+1. 将进程放入后台：<kbd>CTRL</kbd>+<kbd>z</kbd>
 2. 和父进程 disown：`disown <进程名>`
 3. `tmux`
 4. `reptyr $(pgrep <进程名>)` 或者 `reptyr <PID>`
@@ -123,7 +113,7 @@ window -> pane ||`:join-pane -s {source_window} -t {target_window}`||
 
 参考 [PS1 的问题](http://stackoverflow.com/questions/21005966/tmux-prompt-not-following-normal-bash-prompt-ps1-w)
 
-4\. `^R` 反向搜索历史在 tmux 中无法使用：
+4\. <kbd>CTRL</kbd>+<kbd>r</kbd> 反向搜索历史在 tmux 中无法使用：
 
 在 `.zshrc` 中绑定按键，
 ```zsh
@@ -152,9 +142,9 @@ cd !$
 echo 'run-shell ~/tmux/plugins/resurrect/resurrect.tmux' >> ~/.tmux.conf
 tmux source-file ~/.tmux.conf
 ```
-保存：`<P>Ctrl-s`
+保存：`<P>`+<kbd>CTRL</kbd>+<kbd>s</kbd>
 
-恢复：进入 `tmux`，在 tmux 内 `<P>Ctrl-r`
+恢复：进入 `tmux`，在 tmux 内 `<P>`+<kbd>CTRL</kbd>+<kbd>r</kbd>
 
 6\. 切分屏幕（pane）之后鼠标选择粘贴无法限定在小 pane 内
 
@@ -168,9 +158,15 @@ tmux source-file ~/.tmux.conf
 
 [参考 stackoverflow](http://superuser.com/questions/249659/how-to-detach-a-tmux-session-that-itself-already-in-a-tmux)
 
-重复 `<P>` 就好了，比如用 `C-b C-b d` 来 `detach`
+重复 `<P>` 就好了，比如用 <kbd>CTRL</kbd>+<kbd>b</kbd> <kbd>CTRL</kbd>+<kbd>b</kbd> <kbd>d</kbd> 来 `detach`
 
-## workflow
-> we weren’t developing our applications in an environment that accurately represented the live server environment.
+## 参考书
+[tmux Taster](http://book.douban.com/subject/26296805/)
 
-<placeholder>
+## 获取本文使用的配置
+```bash
+brew install stow
+git clone https://github.com/cdpath/dotfiles.git ~/dotfiles
+cd !$
+stow tmux
+```
